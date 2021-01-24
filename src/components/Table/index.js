@@ -7,7 +7,7 @@ const Index = () => {
     const [price, setPrice] = useState('')
     const [id, setId] = useState('')
 
-    const [state, setState] = useState([
+    const [store, setStore] = useState([
         { id: 1 , name: 'Товар 1', price: 1000},
         { id: 2 , name: 'Товар 2', price: 2000},
         { id: 3 , name: 'Товар 3', price: 3000},
@@ -21,11 +21,11 @@ const Index = () => {
     ]);
 
     const remove =  targetId => {
-        setState(prevState => prevState.filter(item => item.id !== targetId));
+        setStore(prevState => prevState.filter(item => item.id !== targetId));
     }
 
     const update =  (targetId) => {
-        setState(prevState => {
+        setStore(prevState => {
             return prevState.map(item => {
                 return item.id == targetId ? { id, name, price } : item
             })
@@ -36,7 +36,7 @@ const Index = () => {
 
     const create =  (e) => {
         const items = { id, name, price }
-        setState([...state, items])
+        setStore([...store, items])
         resetInput()
 
     }
@@ -50,7 +50,7 @@ const Index = () => {
 
     return (
         <div className='container-flex'>
-            <h1>{state.length ? 'Список товаров' : 'Данных нет'}</h1>
+            <h1>{store.length ? 'Список товаров' : 'Данных нет'}</h1>
             <table className='products'>
                 <thead>
                 <tr className='products__tr'>
@@ -62,21 +62,19 @@ const Index = () => {
                 </thead>
 
                 <tbody>
-                {state.map(({ id,name,price }) =>(
+                {store.map(({ id,name,price }) =>(
                     <tr key={id}>
                         <td  className='products__id'>
                             <input
                                 type='text'
                                 defaultValue={id}
-                                value={state.id}
                                 onChange={e => setId(e.target.value)}
                             />
                         </td>
                         <td  className='products__id'>
                             <input
-                                type='text'
+                                type='text'setStore
                                 defaultValue={name}
-                                value={state.name}
                                 onChange={e => setName(e.target.value)}
                             />
                         </td>
@@ -84,7 +82,6 @@ const Index = () => {
                             <input
                                 type='text'
                                 defaultValue={price}
-                                value={state.price}
                                 onChange={e => setPrice(e.target.value)}/>
                         </td>
                         <td>
@@ -102,7 +99,7 @@ const Index = () => {
 
                 <tfoot>
                 <tr>
-                    <td><input onChange={e => setId(e.target.value)}  value={} type="text" placeholder={'Id'}/></td>
+                    <td><input onChange={e => setId(e.target.value)}  type="text" placeholder={'Id'}/></td>
                     <td><input onChange={e => setName(e.target.value)} type="text" placeholder={'Name'}  /></td>
                     <td><input onChange={e => setPrice(e.target.value)} type="text" placeholder={'Price'} /></td>
                     <td>
