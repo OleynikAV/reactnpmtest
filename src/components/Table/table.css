@@ -1,0 +1,30 @@
+.products{
+    width: 100%;
+}
+.products__tr{
+    background-color: antiquewhite;
+}
+.products__td{
+    background-color: lightgray;
+    color: white;
+    font-weight: bold;
+}
+.products__btn{
+    padding: 5px 10px;
+    border-color: transparent;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+    font-size: 14px;
+    cursor: pointer;
+}
+.products__btn-remove{
+    background-color: red;
+}
+.products__btn-update{
+    background-color: green;
+}
+.products__btn-add{
+    background-color: #61dafb;
+}
