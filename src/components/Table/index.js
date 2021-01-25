@@ -20,18 +20,12 @@ const Index = () => {
         { id: 10 , name: 'Товар 10', price: 10000}
     ]);
 
-    const remove =  targetId => {
+    const remove =  (targetId) => {
         setStore(prevState => prevState.filter(item => item.id !== targetId));
     }
-
-    const update =  (targetId) => {
-        setStore(prevState => {
-            return prevState.map(item => {
-                return item.id == targetId ? { id, name, price } : item
-            })
-        })
+    const update = (targetId) =>{
+        setStore((prevState) => prevState.map((item) => (item.id == targetId ? {id, name, price} : item)));
         resetInput()
-
     }
 
     const create =  (e) => {
@@ -47,6 +41,40 @@ const Index = () => {
         setPrice('')
 
     }
+    const renderItem = ({id, name, price})=>(
+        <tr key={id}>
+            <td  className='products__id'>
+                <input
+                    type='text'
+                    defaultValue={id}
+                    onChange={e => setId(e.target.value)}
+                />
+            </td>
+            <td  className='products__id'>
+                <input
+                    type='text'
+                    defaultValue={name}
+                    onChange={e => setName(e.target.value)}
+                />
+            </td>
+            <td  className='products__id'>
+                <input
+                    type='text'
+                    defaultValue={price}
+                    onChange={e => setPrice(e.target.value)}/>
+            </td>
+            <td>
+                <button className='products__btn products__btn-remove'
+                        onClick={()=> remove(id)}
+                >Удалить</button>
+
+                <button className='products__btn products__btn-update'
+                        onClick={()=> update(id, name, price)}
+                >Изменить</button>
+            </td>
+        </tr>
+
+    )
 
     return (
         <div className='container-flex'>
@@ -61,41 +89,7 @@ const Index = () => {
                 </tr>
                 </thead>
 
-                <tbody>
-                {store.map(({ id,name,price }) =>(
-                    <tr key={id}>
-                        <td  className='products__id'>
-                            <input
-                                type='text'
-                                defaultValue={id}
-                                onChange={e => setId(e.target.value)}
-                            />
-                        </td>
-                        <td  className='products__id'>
-                            <input
-                                type='text'setStore
-                                defaultValue={name}
-                                onChange={e => setName(e.target.value)}
-                            />
-                        </td>
-                        <td  className='products__id'>
-                            <input
-                                type='text'
-                                defaultValue={price}
-                                onChange={e => setPrice(e.target.value)}/>
-                        </td>
-                        <td>
-                            <button className='products__btn products__btn-remove'
-                                    onClick={()=> remove(id)}
-                            >Удалить</button>
-
-                            <button className='products__btn products__btn-update'
-                                    onClick={()=> update(id, name, price)}
-                            >Изменить</button>
-                        </td>
-                    </tr>
-                ))}
-                </tbody>
+                <tbody>{store.map(renderItem)}</tbody>
 
                 <tfoot>
                 <tr>
